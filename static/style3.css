@@ -68,3 +68,7 @@ html {
     color: #ffffff;
    font-family: monospace; 
    font-variant:small-caps;}
+
+div.container img{
+  width:70%;
+}
