@@ -16,13 +16,13 @@
   <br><br>
   </div>
   
-  <p>Edge detection is a type of program that will take an image and define and outline its edges. Below are examples of the detection types.</p>
+  <p>Edge detection is a type of program that will take an image and define and outline its edges. Below shows the step by step of how we arrive at the results.</p>
 
   <div class="responsive">
     <br><br>
     <div class="gallery">
-      <a target="_blank" href="../static/moth.jpg">
-        <img src="../static/moth.jpg" alt="loading moth" width="252" height="142">
+      <a target="_blank" href="../static/gardeneel.jpg">
+        <img src="../static/gardeneel.jpg" alt="loading moth" width="252" height="142">
       </a>
       <div class="desc">Original Image</div>
     </div>
@@ -31,30 +31,30 @@
   <div class="responsive">
     <br><br>
     <div class="gallery">
-      <a target="_blank" href="../static/Contourmoth.jpg">
-        <img src="../static/Contourmoth.jpg" alt="loading Contour" width="252" height="142">
+      <a target="_blank" href="../static/cannygardeneel.jpg">
+        <img src="../static/cannygardeneel.jpg" alt="loading Contour" width="252" height="142">
       </a>
-      <div class="desc">Contour</div>
+      <div class="desc">Edges 1</div>
     </div>
   </div>
 
   <div class="responsive">
     <br><br>
     <div class="gallery">
-      <a target="_blank" href="../static/Cannymoth.jpg">
-        <img src="../static/Cannymoth.jpg" alt="loading canny" width="252" height="142">
+      <a target="_blank" href="../static/contourgardeneel.jpg">
+        <img src="../static/contourgardeneel.jpg" alt="loading canny" width="252" height="142">
       </a>
-      <div class="desc">Canny</div>
+      <div class="desc">Edges 2</div>
     </div>
   </div>
 
   <div class="responsive">
     <br><br>
     <div class="gallery">
-      <a target="_blank" href="../static/Sobelmoth.jpg">
-        <img src="../static/Sobelmoth.jpg" alt="loading sobel" width="252" height="142">
+      <a target="_blank" href="../static/cannycontourgardeneel.jpg">
+        <img src="../static/cannycontourgardeneel.jpg" alt="loading sobel" width="252" height="142">
       </a>
-      <div class="desc">Sobel</div>
+      <div class="desc">Combined and Inverted</div>
     </div>
     <br><br>
   </div>
@@ -66,8 +66,14 @@
   <form method="POST" action="/uploads" enctype="multipart/form-data">
     <label for="filepicker">Your Image:</label><br><br>
     <input type="file" id="filepicker"name="photo"><br><br>
-    <label for="Detectionoption">Detection Type:</label><br><br>
-    <select id="Detectionoption" name="Detection Option">
+    <label for="Detectionoption">Detection Type 1:</label><br><br>
+    <select id="Detectionoption" name="Detection Option1">
+      <option value="Contour">Contour</option>
+      <option value="Canny">Canny</option>
+      <option value="Sobel">Sobel</option>
+    </select><br><br>
+    <label for="Detectionoption">Detection Type 2:</label><br><br>
+    <select id="Detectionoption" name="Detection Option2">
       <option value="Contour">Contour</option>
       <option value="Canny">Canny</option>
       <option value="Sobel">Sobel</option>
