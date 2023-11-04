@@ -21,16 +21,56 @@
 
     <p>Edge detection is a technique used to identify the edges of objects in an image. There are several different ways to do edge detection. On this website, we mainly use three: canny, sobel, and contour.</p>
 
-    <h2>Canny</h2>
+    <div class="responsive">
+      <br><br>
+      <div class="gallery">
+        <a target="_blank" href="../static/moth.jpg">
+          <img src="../static/moth.jpg" alt="loading moth" width="252" height="142">
+        </a>
+        <div class="desc">Original Image</div>
+      </div>
+    </div>
+  
+    <div class="responsive">
+      <br><br>
+      <div class="gallery">
+        <a href="#Contour">
+          <img src="../static/Contourmoth.jpg" alt="loading Contour" width="252" height="142">
+        </a>
+        <div class="desc">Contour</div>
+      </div>
+    </div>
+  
+    <div class="responsive">
+      <br><br>
+      <div class="gallery">
+        <a href="#Canny">
+          <img src="../static/Cannymoth.jpg" alt="loading canny" width="252" height="142">
+        </a>
+        <div class="desc">Canny</div>
+      </div>
+    </div>
+  
+    <div class="responsive">
+      <br><br>
+      <div class="gallery">
+        <a href="#Sobel">
+          <img src="../static/Sobelmoth.jpg" alt="loading sobel" width="252" height="142">
+        </a>
+        <div class="desc">Sobel</div>
+      </div>
+      <br><br>
+    </div>
+
+    <h2 id="Canny">Canny</h2>
     <p>Canny edge detection begins by removing noise from an image by blurring it. Then, the image goes through a Sobel kernel, which calculates the intensity gradient magnitude and direction of each pixel. The pixels are then compared to one another to filter out parts that may not be an edge. </p>
     <a href="https://learnopencv.com/edge-detection-using-opencv/#canny-edge">Learn more about Canny edge detection here</a>
-    <h2>Sobel</h2>
+    <h2 id="Sobel">Sobel</h2>
     <p>Sobel edge detection uses a filter made up of 3x3 pixels that are compared to one another, similar to canny edge detection.</p>
     <a href="https://learnopencv.com/edge-detection-using-opencv/#sobel-edge">Learn more about Sobel edge detection here</a>
-    <h2>Contour</h2>
+    <h2 id="Contour">Contour</h2>
     <p>Contour edge detection starts by making the image black and white using a certain threshold. The program then looks at every pixel and outlines the boundaries where black and white meet.</p>
     <a href="https://learnopencv.com/contour-detection-using-opencv-python-c">Learn more about Contour edge detection here</a>
-    <a href="https://google.com">absdhfjnsjdfndjfslsldsjldsf</a>
   </body>
 
 </html>
