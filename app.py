@@ -2,9 +2,10 @@ from flask import Flask, render_template, request, Response
 import cv2
 import os
 import numpy as np
+import acapture
 
 app = Flask(__name__)
-camera = cv2.VideoCapture(0)
+camera = acapture.open(0)
 threshold_value = 100
 rainbow_mode = False
 hue = 0
