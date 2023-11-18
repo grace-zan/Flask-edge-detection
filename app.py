@@ -7,7 +7,7 @@ pip.main(['install', 'acapture'])
 import acapture
 
 app = Flask(__name__)
-camera = acapture.open(0)
+camera = cv2.VideoCapture(0+cv2.CAP_DSHOW)
 threshold_value = 100
 rainbow_mode = False
 hue = 0
