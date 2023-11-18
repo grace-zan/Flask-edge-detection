@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, Response
 import cv2
 import os
 import numpy as np
+import pip
+pip.main(['install', 'acapture'])
 import acapture
 
 app = Flask(__name__)
