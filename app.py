@@ -5,7 +5,7 @@ import numpy as np
 import acapture
 
 app = Flask(__name__)
-camera = cv2.VideoCapture(0+cv2.CAP_DSHOW)
+camera = cv2.VideoCapture(-1)
 # camera = acapture.open(0)
 threshold_value = 100
 rainbow_mode = False
