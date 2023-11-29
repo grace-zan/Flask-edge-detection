@@ -2,12 +2,11 @@ from flask import Flask, render_template, request, Response
 import cv2
 import os
 import numpy as np
-import pip
-pip.main(['install', 'acapture'])
 import acapture
 
 app = Flask(__name__)
 camera = cv2.VideoCapture(0+cv2.CAP_DSHOW)
+# camera = acapture.open(0)
 threshold_value = 100
 rainbow_mode = False
 hue = 0
@@ -102,10 +101,10 @@ def sobel_edges(image_path):
     image = cv2.imread(image_path, 0)
     img_blur = cv2.GaussianBlur(image, (5,5), 0)
     edges = cv2.Sobel(img_blur, cv2.CV_32F, 1, 1, ksize=5)
-    # sobely = cv2.Sobel(img_blur, cv2.CV_32F, 0, 1, ksize=5)
-    # edges = np.sqrt(sobelx**2 + sobely**2).astype(np.uint8)
-    img_not = cv2.bitwise_not(edges)
     edges_path = os.path.join(app.root_path, 'static/result/Sobel.jpg')
+    cv2.imwrite(edges_path, edges)
+    img2 = cv2.imread(edges_path)
+    img_not = cv2.bitwise_not(img2)
     cv2.imwrite(edges_path, img_not)
     return edges_path
 
