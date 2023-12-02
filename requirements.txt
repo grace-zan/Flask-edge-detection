@@ -17,4 +17,4 @@ pygame==2.5.2
 numpy==1.21.6
 opencv-python==4.8.0.74
 Werkzeug==2.2.3
-zipp==3.17.0
+zipp==3.15.0
