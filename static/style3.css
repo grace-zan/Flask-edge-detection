@@ -69,12 +69,12 @@ html {
    font-family: monospace; 
    font-variant:small-caps;}
 
-.row {
+.float-container {
     border: 3px solid #fff;
     padding: 20px;
 }
 
-.inline {
+.float-child {
     width: 50%l
     float: left;
     padding: 20px;
