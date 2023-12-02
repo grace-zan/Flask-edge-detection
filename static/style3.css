@@ -69,6 +69,12 @@ html {
    font-family: monospace; 
    font-variant:small-caps;}
 
+div.col-lg-4(
+    display: inline-block;
+
+div.col-lg-8(
+    display: inline-block;
+
 div.container img{
   width:70%;
 }
