@@ -76,7 +76,6 @@ html {
 
 .float-child {
     flex: 50%;
-    width: 500px;
     height: auto;
     padding: 5px;
 }
