@@ -2,39 +2,92 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Edge Detection</title>
-  <link href="../static/style3.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Edge Detection</title>
+    <link href="../static/style3.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
 
-    <div class="header">
-        <a class="active" href="/">Edge Detection</a>
-        <a class="ac" href="/about">About</a>
-        <a class="ac" href="/convert">Convert</a>
-        <br><br>
-        </div>
-    
-    <h1>Edge Detection Filter</h1>
-    <form method="POST">
-        <button type="submit" name="threshhold" value="rb"class="button">Rainbow Mode</button>
-        <button type="submit" name="threshhold" value="decrease"class="button" >-</button>
-        <button type="submit" name="threshhold" value="increase"class="button">+</button>
-        <br>
-    </form>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8  offset-lg-2">
-                    <img src="{{ url_for('video_feed')}}" width="100%" alt="no camera access" >
-                </div>
-            </div>
-        </div>
-   
+<div class="header">
+    <a class="active" href="/">Edge Detection</a>
+    <a class="ac" href="/about">About</a>
+    <a class="ac" href="/convert">Convert</a>
+    <br><br>
+</div>
+
+<h1>Edge Detection Filter</h1>
+<form method="POST">
+    <button type="submit" name="threshhold" value="rb" class="button">Rainbow Mode</button>
+    <button type="submit" name="threshhold" value="decrease" class="button">-</button>
+    <button type="submit" name="threshhold" value="increase" class="button">+</button>
+    <br>
+</form>
+
+<div class="row">
+    <div class="col-lg-4">
+        <canvas id="live-canvas" width="640" height="480"></canvas>
+    </div>
+    <div class="col-lg-8">
+        <img id="processed-img" width="480" height="360" alt="no camera access">
+    </div>
+</div>
+
+
+
+<script>
+const canvas = document.getElementById('live-canvas');
+const context = canvas.getContext('2d');
+const video = document.createElement('video');
+const processedImage = document.getElementById('processed-img');
+let processing = false;
+
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+        video.srcObject = stream;
+        video.play();
+        requestAnimationFrame(captureFrame);
+    })
+    .catch((error) => {
+        console.error('Error accessing camera:', error);
+    });
+
+function captureFrame() {
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = canvas.toDataURL('image/jpeg');
+
+    if (!processing) {
+        processing = true;
+
+        fetch('/process_frame', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                frame: imageData,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                processedImage.src = data.processed_image_path;
+                processing = false;
+            })
+            .catch(error => {
+                console.error('Error sending frame to server:', error);
+                processing = false;
+            });
+    }
+
+    // Continue capturing frames
+    requestAnimationFrame(captureFrame);
+}
+
+
+
+</script>
+
 </body>
 
-
-
 </html>
-
