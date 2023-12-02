@@ -71,9 +71,8 @@ html {
 
 div.col-lg-4(
     display: inline-block;
-
-div.col-lg-8(
-    display: inline-block;
+    height: auto;
+    width: 50%;
 
 div.container img{
   width:70%;
