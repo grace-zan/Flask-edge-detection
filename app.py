@@ -12,6 +12,7 @@ app = Flask(__name__)
 # camera = acapture.open(0)
 threshold_value = 100
 rainbow_mode = False
+image_overlap = False
 hue = 0
 i = 0
 
@@ -28,6 +29,7 @@ def about():
 
 @app.route('/convert', methods=['GET', 'POST'])
 def convert():
+    global image_overlap
     global threshold_value
     global rainbow_mode
     if request.method == 'POST':
@@ -44,6 +46,8 @@ def convert():
                 threshold_value = 0
         elif action == 'rb':
             rainbow_mode = not rainbow_mode
+        elif action == 'io':
+            image_overlap = not image_overlap
 
     # gen_frames(threshold_value, rainbow_mode)
     return render_template('convert.html', threshold=threshold_value)
@@ -134,6 +138,7 @@ def process_frame():
     global threshold_value
     global rainbow_mode
     global i
+    global image_overlap
     data = request.get_json()
     i += 1
     # Extract frame data and decode
@@ -144,18 +149,24 @@ def process_frame():
     image_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     ret, image_threshold = cv2.threshold(image_gray, threshold_value, 255, 0)
     contours, hierarchy = cv2.findContours(image_threshold, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    height, width, channels = frame.shape
-    image_outlines = np.zeros((height, width, channels), np.uint8)
-    image_color = (255, 255, 255)
-    image_outlines[:] = image_color
+    if not image_overlap:
+        height, width, channels = frame.shape
+        image_outlines = np.zeros((height, width, channels), np.uint8)
+        image_color = (255, 255, 255)
+        image_outlines[:] = image_color
+    else: 
+        image_outlines = frame.copy()
     outline_thickness = 2
     outline_color = (0, 0, 0)
     contour_id = -1
 
     if rainbow_mode:
         outline_color = get_next_color()
-        image_color = (0, 0, 0)
-        image_outlines[:] = image_color
+        if not image_overlap:
+            image_color = (0, 0, 0)
+            image_outlines[:] = image_color
+        else: 
+            image_outlines = frame.copy()
 
     frame_edges = cv2.drawContours(image_outlines, contours, contour_id, outline_color, outline_thickness)
     # Save the processed image to the static folder
