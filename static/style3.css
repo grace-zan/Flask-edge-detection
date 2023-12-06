@@ -76,10 +76,6 @@ html {
 
 .float-child {
     flex: 50%;
-    height: auto;
     padding: 5px;
 }
 
-div.container img{
-  width:70%;
-}
