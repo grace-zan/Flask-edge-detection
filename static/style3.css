@@ -74,6 +74,8 @@ html {
 }
 
 .float-child {
+    flex-basis: 400px;
+    border: #ffffff;
     flex: 50%;
     padding: 5px;
 }
